@@ -47,7 +47,7 @@ function formatDate(date) {
 
 
 function searchCity(city) {
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${CURRENT_API_KEY}`;
+  const apiUrl = `/.netlify/functions/current?city=${encodeURIComponent(city)}`;
   axios.get(apiUrl).then(refreshWeather);
 }
 
@@ -66,9 +66,10 @@ function formatDay(timetemp) {
 }
 
 function getForecast(city) {
- let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${FORECAST_API_KEY}`;
-  axios(apiUrl).then(displayForecast);
+  const apiUrl = `/.netlify/functions/forecast?city=${encodeURIComponent(city)}`;
+  axios.get(apiUrl).then(displayForecast);
 }
+
 
 function displayForecast(response){
   let forecastHtml = "";
